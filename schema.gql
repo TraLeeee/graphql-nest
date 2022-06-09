@@ -1,0 +1,109 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type File {
+  id: ID!
+
+  """Image file path"""
+  filePath: String!
+}
+
+type Staff {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+  password: String!
+  roleIds: String!
+  avatar: File
+  deletedAt: DateTime
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type LoginResponse {
+  """Access token"""
+  access_token: String!
+
+  """Staff info"""
+  staff: Staff!
+}
+
+input FileInput {
+  id: ID!
+
+  """Image file path"""
+  filePath: String!
+}
+
+input StaffInput {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+  password: String!
+  roleIds: String!
+  avatar: FileInput
+  deletedAt: DateTime
+}
+
+type Query {
+  files: [File!]!
+  file(id: Int!): File!
+  staffs: [Staff!]!
+  staff(id: Int!): Staff!
+}
+
+type Mutation {
+  createFile(createFileInput: CreateFileInput!): File!
+  updateFile(updateFileInput: UpdateFileInput!): File!
+  removeFile(id: Int!): File!
+
+  """Create staff"""
+  createStaff(createStaffInput: CreateStaffInput!): Staff!
+  updateStaff(updateStaffInput: UpdateStaffInput!): Staff!
+  removeStaff(id: Int!): Staff!
+  login(loginInput: LoginInput!): LoginResponse!
+}
+
+input CreateFileInput {
+  """Image file path"""
+  filePath: String!
+}
+
+input UpdateFileInput {
+  """Image file path"""
+  filePath: String
+  id: Int!
+}
+
+input CreateStaffInput {
+  firstName: String!
+  lastName: String!
+  email: String!
+  password: String
+  roleIds: String!
+  avatar: FileInput
+}
+
+input UpdateStaffInput {
+  firstName: String
+  lastName: String
+  email: String
+  password: String
+  roleIds: String
+  avatar: FileInput
+  id: Int!
+}
+
+input LoginInput {
+  """Staff email"""
+  email: String!
+
+  """Staff password"""
+  password: String!
+}
