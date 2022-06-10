@@ -3,6 +3,8 @@ import { StaffsService } from './staffs.service';
 import { Staff } from '../entities/staff.entity';
 import { CreateStaffInput } from './dto/create-staff.input';
 import { UpdateStaffInput } from './dto/update-staff.input';
+import { UseGuards } from '@nestjs/common';
+import { JwtGuard } from '../auth/jwt.guard';
 
 @Resolver(() => Staff)
 export class StaffsResolver {
@@ -14,6 +16,7 @@ export class StaffsResolver {
   }
 
   @Query(() => [Staff], { name: 'staffs' })
+  @UseGuards(JwtGuard)
   findAll() {
     return this.staffsService.findAll();
   }

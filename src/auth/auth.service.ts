@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { StaffsService } from '../staffs/staffs.service';
 import { JwtService } from '@nestjs/jwt';
 import { Staff } from 'src/entities/staff.entity';
+import { StaffSignupInput } from './dto/staff-signup.input';
+import { StaffSignupResponse } from './dto/staff-signup.response';
 
 @Injectable()
 export class AuthService {
@@ -20,7 +22,7 @@ export class AuthService {
     return null;
   }
 
-  async login(staff: Staff) {
+  async signin(staff: Staff) {
     const payload = {
       email: staff.email,
       sub: staff.id,
@@ -29,5 +31,10 @@ export class AuthService {
       access_token: this.jwtService.sign(payload),
       staff,
     };
+  }
+
+  async signup(signupInput: StaffSignupInput): Promise<StaffSignupResponse> {
+    const staff = await this.staffsService.create(signupInput);
+    return staff;
   }
 }

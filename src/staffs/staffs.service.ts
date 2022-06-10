@@ -18,7 +18,7 @@ export class StaffsService {
   }
 
   findAll() {
-    return `This action returns all staffs`;
+    return this.staffsRepository.find();
   }
 
   findOne(id: number) {

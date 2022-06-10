@@ -7,19 +7,18 @@ import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class Database {
-  constructor(private configService: ConfigService) {}
-  credentials(): TypeOrmModuleOptions {
+  get credentials(): TypeOrmModuleOptions {
     return {
       entities: [File, Staff],
       keepConnectionAlive: false,
-      dropSchema: true,
+      dropSchema: false,
       type: 'mysql',
       name: 'default',
-      host: this.configService.get('DB_HOST'),
-      port: this.configService.get('DB_PORT'),
-      username: this.configService.get('DB_USER'),
-      password: this.configService.get('DB_PWD'),
-      database: this.configService.get('DB_NAME'),
+      host: process.env.DB_HOST, //this.configService.get('DB_HOST'),
+      port: process.env.DB_PORT, //this.configService.get('DB_PORT'),
+      username: process.env.DB_USER, //this.configService.get('DB_USER'),
+      password: process.env.DB_PWD, //this.configService.get('DB_PWD'),
+      database: process.env.DB_NAME, //this.configService.get('DB_NAME'),
       migrationsRun: false,
       synchronize: true,
       logging: true,

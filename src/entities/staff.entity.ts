@@ -9,7 +9,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { File } from '../entities/file.entity';
+import { File } from './file.entity';
 
 @Entity({ name: 'staffs' })
 @InputType('StaffInput')
@@ -62,7 +62,7 @@ export class Staff {
   @JoinColumn({
     name: 'avatar',
   })
-  @Field(() => File, { nullable: true })
+  @Field(() => File, { nullable: false })
   avatar?: File;
 
   @CreateDateColumn({
